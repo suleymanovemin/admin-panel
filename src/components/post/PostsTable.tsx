@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -13,64 +13,60 @@ import {
   Typography,
 } from "@mui/material";
 
-import PostModal from "./PostModal";
 import DeleteConfirmation from "./DeleteConfirmation";
 import type { Post, PostsTableProps } from "../../types/types";
-import Select from "../common/Select";
+import Select from "./Select";
+import { formatDate, formatTime } from "../../libs";
 
-const PostsTable: React.FC<PostsTableProps> = ({ posts, onEdit, onDelete }) => {
-  const [deleteId, setDeleteId] = useState<string | null>(null);
-  const [editingPost, setEditingPost] = useState<Post | null>(null);
+const PostsTable = ({ posts, onDelete, setAlert, onOpenEdit }: PostsTableProps) => {
+  const [deletePost, setDeletePost] = useState<{ id: string; title: string } | null>(null);
 
-  const handleEditClick = (post: Post) => {
-    setEditingPost(post);
+  const handleDeleteClick = (post: Post) => {
+    setDeletePost({ id: post.id, title: post.title });
   };
 
-  const handleDeleteClick = (id: string) => {
-    setDeleteId(id);
+  const handleEditClick = (post: Post) => {
+    if (onOpenEdit) onOpenEdit(post);
   };
 
   const handleDeleteConfirm = () => {
-    if (deleteId) {
-      onDelete(deleteId);
-      setDeleteId(null);
+    if (deletePost) {
+      onDelete(deletePost.id);
+      setDeletePost(null);
     }
-  };
-
-  const handleModalClose = () => {
-    setEditingPost(null);
-  };
-
-  const handleSubmit = (data: Post) => {
-    onEdit(data);
-    setEditingPost(null);
   };
 
   return (
     <>
-      <TableContainer component={Paper}>
+      <TableContainer
+        component={Paper}
+        sx={{
+          height: "calc(100vh - 300px)",
+          overflowY: "auto",
+        }}
+      >
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell className="border border-[#F5F5F5] text-[#243C7B]!">
+              <TableCell className="border border-[#F5F5F5] text-[#243C7B]! font-semibold!">
                 Post
               </TableCell>
-              <TableCell className="border border-[#F5F5F5] text-[#243C7B]!">
+              <TableCell className="border border-[#F5F5F5] text-[#243C7B]! font-semibold!">
                 Type
               </TableCell>
-              <TableCell className="border border-[#F5F5F5] text-[#243C7B]!">
+              <TableCell className="border border-[#F5F5F5] text-[#243C7B]! font-semibold!">
                 Sharing Time
               </TableCell>
-              <TableCell className="border border-[#F5F5F5] text-[#243C7B]!">
+              <TableCell className="border border-[#F5F5F5] text-[#243C7B]! font-semibold!">
                 Status
               </TableCell>
-              <TableCell className="border border-[#F5F5F5] text-[#243C7B]!">
+              <TableCell className="border border-[#F5F5F5] text-[#243C7B]! font-semibold!">
                 Publish Status
               </TableCell>
-              <TableCell className="border border-[#F5F5F5] text-[#243C7B]!">
+              <TableCell className="border border-[#F5F5F5] text-[#243C7B]! font-semibold!">
                 Author
               </TableCell>
-              <TableCell className="border border-[#F5F5F5] text-[#243C7B]!">
+              <TableCell className="border border-[#F5F5F5] text-[#243C7B]! font-semibold!">
                 Actions
               </TableCell>
             </TableRow>
@@ -80,11 +76,24 @@ const PostsTable: React.FC<PostsTableProps> = ({ posts, onEdit, onDelete }) => {
               <TableRow key={post.id} hover>
                 <TableCell>
                   <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                    <Avatar src={post.image} variant="rounded" />
+                    <Avatar
+                      className="w-32! h-24!"
+                      src={post.image}
+                      variant="rounded"
+                    />
                     <Box>
-                      <Typography variant="subtitle2">{post.title}</Typography>
-                      <Typography variant="caption" color="textSecondary">
-                        {post.description.substring(0, 50)}...
+                      <Typography
+                        className="font-semibold! text-base!"
+                        variant="subtitle2"
+                      >
+                        {post.title}
+                      </Typography>
+                      <Typography
+                        className="text-[#6A7282]! text-sm! mt-2!"
+                        variant="caption"
+                        color="textSecondary"
+                      >
+                        {post.content.substring(0, 50)}...
                       </Typography>
                     </Box>
                   </Box>
@@ -95,7 +104,14 @@ const PostsTable: React.FC<PostsTableProps> = ({ posts, onEdit, onDelete }) => {
                   </p>
                 </TableCell>
                 <TableCell>
-                  {new Date(post.sharingTime).toLocaleString()}
+                  <div className="text-center">
+                    <p className="text-base text-[#222222] mb-0.5">
+                      {formatDate(post.date)}
+                    </p>
+                    <span className="text-[#AAAAAA] text-xs">
+                      {formatTime(post.date)}
+                    </span>
+                  </div>
                 </TableCell>
                 <TableCell>
                   <p className="text-[#145E00] bg-[#E7FFE1] text-center p-2 rounded-4xl text-sm ">
@@ -117,21 +133,19 @@ const PostsTable: React.FC<PostsTableProps> = ({ posts, onEdit, onDelete }) => {
                       },
                     ]}
                     label="Publish Status"
+                    type="withStatus"
                     filterKey="publishStatus"
-                    setFilters={() => {}}
+                    setFilters={() => { }}
                   />
                 </TableCell>
                 <TableCell>{post.author}</TableCell>
                 <TableCell>
                   <div className="flex">
-                    <IconButton
-                      onClick={() => handleEditClick(post)}
-                      size="small"
-                    >
+                    <IconButton onClick={() => handleEditClick(post)} size="small">
                       <img src="/icons/edit.svg" alt="edit" />
                     </IconButton>
                     <IconButton
-                      onClick={() => handleDeleteClick(post.id)}
+                      onClick={() => handleDeleteClick(post)}
                       size="small"
                       color="error"
                     >
@@ -145,19 +159,11 @@ const PostsTable: React.FC<PostsTableProps> = ({ posts, onEdit, onDelete }) => {
         </Table>
       </TableContainer>
 
-      {editingPost && (
-        <PostModal
-          open={!!editingPost}
-          onClose={handleModalClose}
-          post={editingPost}
-          onSubmit={handleSubmit}
-        />
-      )}
-
       <DeleteConfirmation
-        open={!!deleteId}
-        onClose={() => setDeleteId(null)}
+        open={!!deletePost}
+        onClose={() => setDeletePost(null)}
         onConfirm={handleDeleteConfirm}
+        postTitle={deletePost?.title || ""}
       />
     </>
   );

@@ -1,13 +1,15 @@
 import { RxCross2 } from "react-icons/rx";
 
 import { Dialog, DialogContent, DialogActions } from "@mui/material";
+import type { AlertType } from "../../types/types";
 
 interface SuccessProps {
   open: boolean;
   onClose: () => void;
+  type: AlertType;
 }
 
-const Success = ({ open, onClose }: SuccessProps) => {
+const AlertModal = ({ open, onClose, type }: SuccessProps) => {
   return (
     <Dialog
       open={open}
@@ -36,8 +38,16 @@ const Success = ({ open, onClose }: SuccessProps) => {
           </div>
         </div>
         <DialogContent>
-          <h1 className=" mt-6 mb-2 font-bold text-2xl">Added Successfully!</h1>
-          <p>Your news added successfully</p>
+          <h1 className=" mt-6 mb-2 font-bold text-2xl">
+            {type === "SUCCESS"
+              ? "Added Successfully!"
+              : "Deleted Successfully!"}
+          </h1>
+          <p>
+            {type === "SUCCESS"
+              ? "Your post has been added successfully."
+              : "Your post has been deleted successfully."}
+          </p>
         </DialogContent>
         <DialogActions>
           <div className="w-full flex justify-between gap-2.5">
@@ -56,4 +66,4 @@ const Success = ({ open, onClose }: SuccessProps) => {
   );
 };
 
-export default Success;
+export default AlertModal;

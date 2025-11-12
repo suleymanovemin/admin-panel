@@ -1,6 +1,6 @@
 import type { FiltersType } from "../../types/types";
-import Search from "../common/Search";
-import Select from "../common/Select";
+import Search from "./Search";
+import Select from "./Select";
 
 const Filters = ({
   setFilters,

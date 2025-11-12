@@ -12,12 +12,14 @@ interface DeleteConfirmationProps {
   open: boolean;
   onClose: () => void;
   onConfirm: () => void;
+  postTitle: string;
 }
 
 const DeleteConfirmation: React.FC<DeleteConfirmationProps> = ({
   open,
   onClose,
   onConfirm,
+  postTitle,
 }) => {
   return (
     <Dialog
@@ -47,12 +49,7 @@ const DeleteConfirmation: React.FC<DeleteConfirmationProps> = ({
           <DialogContentText id="alert-dialog-description">
             <h1 className=" mt-6 mb-2 font-bold text-2xl">Delete Post</h1>
             Are you sure you want to delete the post -{" "}
-            <strong className="font-bold">
-              Milli Aviasiya Akademiyasının təşkilatçılığı ilə hazırlanan
-              “Research and Updates on the Use of Artificial Intelligence in
-              Drone Technology” kitabı Springer Nature nəşriyyatında dərc
-              olunub?
-            </strong>
+            <strong className="font-bold">{postTitle}</strong>?
           </DialogContentText>
         </DialogContent>
         <DialogActions>

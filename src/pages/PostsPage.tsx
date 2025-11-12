@@ -1,65 +1,149 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Filters from "../components/post/Filters";
 import Heading from "../components/post/Heading";
 import PostsTable from "../components/post/PostsTable";
-import type { FiltersType, Post } from "../types/types";
-import { mockPosts } from "../constants/posts";
+import type { FiltersType, Post, AlertType } from "../types/types";
 import PostModal from "../components/post/PostModal";
-import Success from "../components/post/Success";
+
+
+import { useNews, useDeletePost } from "../hooks";
+import Pagination from "../components/post/Pagination";
+import AlertModal from "../components/post/AlertModal";
+import TableSkeleton from "../components/post/Skeleton";
 
 const PostsPage = () => {
+  const { data, isLoading, error } = useNews();
+  const deletePostMutation = useDeletePost();
+
   const [filters, setFilters] = useState<FiltersType>({
     search: "",
     status: "all",
     category: "all",
   });
-  const [posts, setPosts] = useState<Post[]>(mockPosts);
+
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [editingPost, setEditingPost] = useState<Post | null>(null);
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState<{
+    isOpen: boolean;
+    type: AlertType;
+  }>({
+    isOpen: false,
+    type: "SUCCESS",
+  });
 
-  const handleAddPost = (newPost: Post) => {
-    setPosts([...posts, { ...newPost, id: Date.now().toString() }]);
-    setIsAddModalOpen(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(3);
+
+  useEffect(() => {
+    if (data) {
+      setPosts(data);
+      setFilteredPosts(data);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    let result = posts;
+
+    if (filters.search) {
+      result = result.filter((post) =>
+        post.title.toLowerCase().includes(filters.search.toLowerCase())
+      );
+    }
+    if (filters.status !== "all") {
+      result = result.filter(
+        (post) => post.status.toLowerCase() === filters.status.toLowerCase()
+      );
+    }
+    if (filters.category !== "all") {
+      result = result.filter(
+        (post) => post.type.toLowerCase() === filters.category.toLowerCase()
+      );
+    }
+
+    setFilteredPosts(result);
+    setCurrentPage(1);
+  }, [filters, posts]);
+
+  const start = (currentPage - 1) * postsPerPage;
+  const currentPosts = filteredPosts.slice(start, start + postsPerPage);
+
+  const handleDeletePost = async (id: string) => {
+    try {
+      await deletePostMutation.mutateAsync(id);
+      setIsAlertModalOpen({ isOpen: true, type: "DELETE" });
+    } catch (error) {
+      console.error("Failed to delete post:", error);
+      alert("Failed to delete post. Please try again.");
+    }
   };
 
-  const handleEditPost = (updatedPost: Post) => {
-    setPosts(
-      posts.map((post) => (post.id === updatedPost.id ? updatedPost : post))
-    );
-  };
+  if (error) return <div>Error: {error.message}</div>;
 
-  const handleDeletePost = (id: string) => {
-    setPosts(posts.filter((post) => post.id !== id));
-    setIsSuccessModalOpen(true);
-  };
+
 
   return (
     <>
-      <Heading setIsAddModalOpen={setIsAddModalOpen} />
+      <Heading
+        setIsAddModalOpen={(open: boolean) => {
+          if (open) setEditingPost(null);
+          setIsAddModalOpen(open);
+        }}
+      />
 
       {/* Filters */}
       <Filters setFilters={setFilters} />
 
       {/* Table */}
-      <PostsTable
-        posts={mockPosts}
-        onEdit={handleEditPost}
-        onDelete={handleDeletePost}
-      />
+      {isLoading ? (
+        <TableSkeleton />
+      ) : (
+        <PostsTable
+          setAlert={(open: boolean, type: AlertType = "SUCCESS") =>
+            setIsAlertModalOpen({ isOpen: open, type })
+          }
+          posts={currentPosts}
+          onDelete={handleDeletePost}
+          onOpenEdit={(post: Post) => {
+            setEditingPost(post);
+            setIsAddModalOpen(true);
+          }}
+        />
+      )}
+
+      {/*  Pagination */}
+      <div className="mt-6">
+        <Pagination
+          totalPosts={filteredPosts.length}
+          postsPerPage={postsPerPage}
+          setPostsPerPage={setPostsPerPage}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      </div>
 
       {/* Add Post Modal */}
       {isAddModalOpen && (
         <PostModal
           open={isAddModalOpen}
-          onClose={() => setIsAddModalOpen(false)}
-          onSubmit={handleAddPost}
-          post={null}
+          onClose={() => {
+            setIsAddModalOpen(false);
+            setEditingPost(null);
+          }}
+          setAlert={(open: boolean, type: AlertType = "SUCCESS") =>
+            setIsAlertModalOpen({ isOpen: open, type })
+          }
+          post={editingPost ?? undefined}
         />
       )}
 
-      <Success
-        open={isSuccessModalOpen}
-        onClose={() => setIsSuccessModalOpen(false)}
+      <AlertModal
+        open={isAlertModalOpen.isOpen}
+        onClose={() =>
+          setIsAlertModalOpen({ isOpen: false, type: isAlertModalOpen.type })
+        }
+        type={isAlertModalOpen.type}
       />
     </>
   );

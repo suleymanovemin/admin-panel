@@ -13,11 +13,20 @@ type Props = {
   label: string;
   setFilters: React.Dispatch<React.SetStateAction<FiltersType>>;
   filterKey: string;
+  type?: "standart" | "withStatus";
 };
 
-const Select = ({ options, label, setFilters, filterKey }: Props) => {
+const Select = ({
+  options,
+  label,
+  setFilters,
+  filterKey,
+  type = "standart",
+}: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState<Option>(
+    type === "withStatus" ? options[0] : { value: "", label }
+  );
   const selectRef = useRef<HTMLDivElement>(null);
 
   const handleOpen = () => {
@@ -25,7 +34,7 @@ const Select = ({ options, label, setFilters, filterKey }: Props) => {
   };
 
   const handleSelect = (option: Option) => {
-    setSelectedOption(option.label);
+    setSelectedOption(option);
     setFilters((prev) => ({ ...prev, [filterKey]: option.value }));
     setIsOpen(false);
   };
@@ -49,7 +58,18 @@ const Select = ({ options, label, setFilters, filterKey }: Props) => {
       onClick={handleOpen}
       className="border relative border-[#E5E7EB] rounded-[10px] p-2 w-max min-w-[150px] flex items-center justify-between text-[#0A0A0A] cursor-pointer select-none"
     >
-      {selectedOption || label}
+      {type === "withStatus" && selectedOption?.status !== undefined && (
+        <div
+          className={twMerge(
+            "size-2 rounded-full mr-2",
+            selectedOption.status ? "bg-[#1DB100]" : "bg-[#D82C2C]"
+          )}
+        ></div>
+      )}
+
+      {type === "withStatus"
+        ? selectedOption.label
+        : selectedOption.label || label}
       <IoIosArrowDown
         className={twMerge(
           "text-[#787486] duration-150",
