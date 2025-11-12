@@ -9,6 +9,7 @@ import { useNews, useDeletePost } from "../hooks";
 import Pagination from "../components/post/Pagination";
 import AlertModal from "../components/post/AlertModal";
 import TableSkeleton from "../components/post/Skeleton";
+import Empty from "../components/post/Empty";
 
 const PostsPage = () => {
   const { data, isLoading, error } = useNews();
@@ -95,6 +96,8 @@ const PostsPage = () => {
       {/* Table */}
       {isLoading ? (
         <TableSkeleton />
+      ) : filteredPosts.length === 0 ? (
+        <Empty />
       ) : (
         <PostsTable
           setAlert={(open: boolean, type: AlertType = "SUCCESS") =>
@@ -110,15 +113,17 @@ const PostsPage = () => {
       )}
 
       {/*  Pagination */}
-      <div className="mt-6">
-        <Pagination
-          totalPosts={filteredPosts.length}
-          postsPerPage={postsPerPage}
-          setPostsPerPage={setPostsPerPage}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
-      </div>
+      {!isLoading && filteredPosts.length > 0 && (
+        <div className="mt-6">
+          <Pagination
+            totalPosts={filteredPosts.length}
+            postsPerPage={postsPerPage}
+            setPostsPerPage={setPostsPerPage}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        </div>
+      )}
 
       {/* Add Post Modal */}
       {isAddModalOpen && (

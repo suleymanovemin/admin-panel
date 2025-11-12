@@ -16,7 +16,7 @@ const UserProfile = ({
       <img src={avatarSrc} alt={name} />
       <div>
         <p>{name}</p>
-        {username && <span className="#D1D1D1">{username}</span>}
+        {username && <span className="text-[#D1D1D1]">{username}</span>}
       </div>
     </div>
   );
