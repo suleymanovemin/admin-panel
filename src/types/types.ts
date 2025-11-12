@@ -58,3 +58,10 @@ export interface PostData {
   EN: LanguageFormValues;
   multipleImages: File[];
 }
+
+export interface UserProfileType  {
+  name: string;
+  username?: string;
+  avatarSrc?: string;
+  className?: string;
+};

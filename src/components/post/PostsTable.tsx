@@ -18,8 +18,11 @@ import type { Post, PostsTableProps } from "../../types/types";
 import Select from "./Select";
 import { formatDate, formatTime } from "../../libs";
 
-const PostsTable = ({ posts, onDelete, setAlert, onOpenEdit }: PostsTableProps) => {
-  const [deletePost, setDeletePost] = useState<{ id: string; title: string } | null>(null);
+const PostsTable = ({ posts, onDelete, onOpenEdit }: PostsTableProps) => {
+  const [deletePost, setDeletePost] = useState<{
+    id: string;
+    title: string;
+  } | null>(null);
 
   const handleDeleteClick = (post: Post) => {
     setDeletePost({ id: post.id, title: post.title });
@@ -135,13 +138,16 @@ const PostsTable = ({ posts, onDelete, setAlert, onOpenEdit }: PostsTableProps) 
                     label="Publish Status"
                     type="withStatus"
                     filterKey="publishStatus"
-                    setFilters={() => { }}
+                    setFilters={() => {}}
                   />
                 </TableCell>
                 <TableCell>{post.author}</TableCell>
                 <TableCell>
                   <div className="flex">
-                    <IconButton onClick={() => handleEditClick(post)} size="small">
+                    <IconButton
+                      onClick={() => handleEditClick(post)}
+                      size="small"
+                    >
                       <img src="/icons/edit.svg" alt="edit" />
                     </IconButton>
                     <IconButton

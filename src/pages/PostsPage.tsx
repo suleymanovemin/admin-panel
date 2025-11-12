@@ -5,7 +5,6 @@ import PostsTable from "../components/post/PostsTable";
 import type { FiltersType, Post, AlertType } from "../types/types";
 import PostModal from "../components/post/PostModal";
 
-
 import { useNews, useDeletePost } from "../hooks";
 import Pagination from "../components/post/Pagination";
 import AlertModal from "../components/post/AlertModal";
@@ -69,9 +68,9 @@ const PostsPage = () => {
   const start = (currentPage - 1) * postsPerPage;
   const currentPosts = filteredPosts.slice(start, start + postsPerPage);
 
-  const handleDeletePost = async (id: string) => {
+  const handleDeletePost = async () => {
     try {
-      await deletePostMutation.mutateAsync(id);
+      await deletePostMutation.mutateAsync();
       setIsAlertModalOpen({ isOpen: true, type: "DELETE" });
     } catch (error) {
       console.error("Failed to delete post:", error);
@@ -80,8 +79,6 @@ const PostsPage = () => {
   };
 
   if (error) return <div>Error: {error.message}</div>;
-
-
 
   return (
     <>

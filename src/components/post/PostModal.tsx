@@ -3,7 +3,12 @@ import { useState, useCallback, useEffect } from "react";
 import { RxCross2 } from "react-icons/rx";
 
 import { LANGUAGES } from "../../constants/enums";
-import type { LanguageFormValues, PostData, Post, AlertType } from "../../types/types";
+import type {
+  LanguageFormValues,
+  PostData,
+  Post,
+  AlertType,
+} from "../../types/types";
 import LanguageToggle from "./modal/LanguageToggle";
 import { useForm } from "react-hook-form";
 import Step1 from "./modal/Step1";
@@ -26,7 +31,7 @@ const defaultPostData: PostData = {
   multipleImages: [],
 };
 
-interface Step1FormValues extends LanguageFormValues { }
+interface Step1FormValues extends LanguageFormValues {}
 
 const slugify = (text: string) =>
   text
@@ -206,15 +211,13 @@ const PostModal = ({
 
     const azData = activeLang === LANGUAGES.AZ ? data : updatedPostData.AZ;
 
-    // treat either uploaded cover image (form field) OR existing preview URL as satisfying cover image requirement
-    const isAZFilled =
-      !!(
-        azData.title &&
-        azData.slug &&
-        azData.category &&
-        azData.htmlContent &&
-        (azData.coverImage || coverImagePreview)
-      );
+    const isAZFilled = !!(
+      azData.title &&
+      azData.slug &&
+      azData.category &&
+      azData.htmlContent &&
+      (azData.coverImage || coverImagePreview)
+    );
 
     if (activeLang === LANGUAGES.AZ) {
       if (!isAZFilled) {
@@ -227,7 +230,9 @@ const PostModal = ({
       setCurrentStep(2);
     } else if (activeLang === LANGUAGES.EN) {
       if (!isAZFilled) {
-        alert("Please fill the required fields for the AZ (Azerbaijani) language first.");
+        alert(
+          "Please fill the required fields for the AZ (Azerbaijani) language first."
+        );
         handleLanguageSwitch(LANGUAGES.AZ);
         return;
       }

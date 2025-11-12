@@ -36,7 +36,7 @@ export const useDeletePost = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (id: string) => postService.deletePost(id),
+    mutationFn: () => postService.deletePost(),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["news"] });
     },
@@ -47,13 +47,7 @@ export const useUpdatePublishStatus = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({
-      id,
-      publishStatus,
-    }: {
-      id: string;
-      publishStatus: "Published" | "Draft" | "Scheduled";
-    }) => postService.updatePublishStatus(id, publishStatus),
+    mutationFn: () => postService.updatePublishStatus(),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["news"] });
     },
