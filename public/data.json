@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "title": "Milli Aviasiya Akademiyasında Yeni Təlim Mərkəzi Açıldı",
+    "summary": "Tələbələr üçün müasir aviasiya təlimləri təşkil olunacaq yeni mərkəz istifadəyə verildi.",
+    "content": "Milli Aviasiya Akademiyası tərəfindən aviasiya təlimləri üçün yeni tədris mərkəzi açıldı. Bu mərkəz tələbələrə praktiki və nəzəri bilikləri eyni anda təqdim etməyi hədəfləyir...",
+    "author": "Aysel Həsənova",
+    "date": "2025-11-01"
+  },
+  {
+    "id": 2,
+    "title": "Akademiyada Beynəlxalq Konfrans Keçirildi",
+    "summary": "Hava nəqliyyatı sahəsində yeniliklər və təcrübələr müzakirə olundu.",
+    "content": "Noyabr ayında Milli Aviasiya Akademiyasında beynəlxalq konfrans keçirildi. Konfransda yerli və xarici mütəxəssislər hava nəqliyyatı, təhlükəsizlik və innovativ texnologiyalar mövzusunda məruzələr etdilər...",
+    "author": "Elvin Məmmədov",
+    "date": "2025-10-28"
+  },
+  {
+    "id": 3,
+    "title": "Yeni Aviasiya Kursları Tələbələr Üçün Açıldı",
+    "summary": "Praktiki uçuş və simulyator dərsləri ilə kurslar başladı.",
+    "content": "Milli Aviasiya Akademiyası tələbələr üçün yeni kurslar təşkil etdi. Kurslar simulyatorlarda praktiki təlimlər və nəzəri dərsləri əhatə edir...",
+    "author": "Nərmin Qasımova",
+    "date": "2025-10-20"
+  },
+  {
+    "id": 4,
+    "title": "Akademiyada Aviasiya Texnologiyaları Laboratoriyası",
+    "summary": "Yeni laboratoriya tələbələr üçün praktiki imkanlar yaradacaq.",
+    "content": "Laboratoriyada tələbələr aviasiya texnologiyaları üzrə eksperimentlər aparacaq və praktiki biliklərini artıracaq. Laboratoriya həmçinin elmi tədqiqatlar üçün də istifadə olunacaq...",
+    "author": "Rauf Əliyev",
+    "date": "2025-10-15"
+  },
+  {
+    "id": 5,
+    "title": "Tələbələr Aviasiya Sərgisində İştirak Etdi",
+    "summary": "Milli Aviasiya Akademiyası tələbələrinin nailiyyətləri sərgidə nümayiş olundu.",
+    "content": "Sərgidə tələbələr öz layihələrini nümayiş etdirdilər və müxtəlif şirkətlərdən mütəxəssislərlə tanış oldular. Bu tədbir tələbələrin gələcək karyerası üçün əhəmiyyətli idi...",
+    "author": "Zəhra Rzayeva",
+    "date": "2025-10-10"
+  },
+  {
+    "id": 6,
+    "title": "Akademiya ilə Sənaye Şirkətləri Arasında Əməkdaşlıq",
+    "summary": "Tələbələr üçün təcrübə imkanları genişləndirilir.",
+    "content": "Milli Aviasiya Akademiyası bir sıra sənaye şirkətləri ilə əməkdaşlığa başladı. Bu əməkdaşlıq tələbələr üçün praktik təcrübə imkanlarını artıracaq və iş bazarında rəqabət qabiliyyətini yüksəldəcək...",
+    "author": "Murad Cəfərov",
+    "date": "2025-09-30"
+  },
+  {
+    "id": 7,
+    "title": "Yeni Pilotaj Təlimləri Başladı",
+    "summary": "Tələbələr real uçuş təcrübəsi qazanacaq.",
+    "content": "Pilotaj fakültəsində yeni təlimlər başladı. Təlimlərdə tələbələr həm simulyatorlarda, həm də real uçuşlarda iştirak edəcək, uçuş bacarıqlarını inkişaf etdirəcəklər...",
+    "author": "Fidan Hüseynova",
+    "date": "2025-09-25"
+  },
+  {
+    "id": 8,
+    "title": "Akademiya Tələbələrinin Elmi Layihəsi Mükafat Qazandı",
+    "summary": "Tələbələrin layihəsi beynəlxalq müsabiqədə birinci yer aldı.",
+    "content": "Milli Aviasiya Akademiyasının tələbələri tərəfindən hazırlanmış elmi layihə beynəlxalq müsabiqədə qalib oldu. Layihə aviasiya texnologiyaları sahəsində yeniliklər təqdim edir...",
+    "author": "Orxan Quliyev",
+    "date": "2025-09-20"
+  },
+  {
+    "id": 9,
+    "title": "Yeni Texnologiya Seminarı Tələbələr Üçün",
+    "summary": "Seminar aviasiya texnologiyaları üzrə yeni tendensiyaları əhatə etdi.",
+    "content": "Milli Aviasiya Akademiyası tələbələr üçün yeni texnologiya seminarı təşkil etdi. Seminar zamanı mütəxəssislər yeni aviasiya sistemləri və proqram təminatı barədə məlumat verdilər...",
+    "author": "Leyla Səlimova",
+    "date": "2025-09-15"
+  },
+  {
+    "id": 10,
+    "title": "Akademiyada Tədris Proqramı Yeniləndi",
+    "summary": "Tələbələr üçün tədris proqramına yeni kurslar əlavə olundu.",
+    "content": "Milli Aviasiya Akademiyasında tədris proqramı yeniləndi. Yeni kurslar tələbələrə həm nəzəri, həm də praktiki bilikləri daha effektiv şəkildə təqdim edəcək...",
+    "author": "Emin Süleymanov",
+    "date": "2025-09-10"
+  }
+]
