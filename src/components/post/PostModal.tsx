@@ -268,9 +268,7 @@ const PostModal = ({
 
   const totalSteps = 2;
   const headerText =
-    currentStep === 1
-      ? `Create News / Announcement - ${activeLang}`
-      : "Add Additional Media";
+    currentStep === 1 ? `Create News / Announcement` : "Add Additional Media";
 
   const progressPercent = (currentStep / totalSteps) * 100;
 

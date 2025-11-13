@@ -54,9 +54,7 @@ const Step1 = ({
           control={control}
           rules={{
             required:
-              activeLang === LANGUAGES.AZ
-                ? `Title is required for ${activeLang}`
-                : false,
+              activeLang === LANGUAGES.AZ ? `Title is required for` : false,
           }}
           render={({ field }) => (
             <input
@@ -66,7 +64,7 @@ const Step1 = ({
               } rounded-xl`}
               id="title"
               type="text"
-              placeholder={`Enter title for ${activeLang}`}
+              placeholder={`Enter title for`}
             />
           )}
         />
@@ -252,9 +250,7 @@ const Step1 = ({
           type="submit"
           className="w-full py-2 text-white bg-[#243C7B] rounded-xl cursor-pointer hover:bg-[#1f3366] transition"
         >
-          {activeLang === LANGUAGES.AZ
-            ? "Next (Step 2)"
-            : "Save EN & Next (Step 2)"}
+          {activeLang === LANGUAGES.AZ ? "Next" : "Save & Next"}
         </button>
       </div>
     </form>
