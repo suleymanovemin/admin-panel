@@ -1,73 +1,99 @@
-# React + TypeScript + Vite
+# Admin Panel Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is an admin panel developed using React, TypeScript, and Vite. It is powered by modern UI libraries, efficient data management, and a fast development experience.
 
-Currently, two official plugins are available:
+## Table of Contents
+- [Setup & Running](#setup--running)
+- [Main Dependencies](#main-dependencies)
+- [Data Structure & Source](#data-structure--source)
+- [Project Structure](#project-structure)
+- [Features](#features)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Setup & Running
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. **Clone the repository:**
+   ```bash
+   git clone <repo-url>
+   cd admin-panel
+   ```
+2. **Install dependencies:**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+4. Open your browser and go to `http://localhost:5173` to view the project.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**To build the project:**
+```bash
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**To preview the production build:**
+```bash
+npm run preview
 ```
+
+## Main Dependencies
+
+- **React** (`^19.x`): UI development
+- **TypeScript**: Type safety
+- **Vite**: Fast development and build tool
+- **@mui/material** & **@mui/icons-material**: Modern and accessible UI components
+- **TailwindCSS**: Utility-first CSS framework
+- **@tanstack/react-query**: Server state management and caching
+- **react-hook-form & @hookform/resolvers**: Form management and validation
+- **primereact**: Additional UI components
+- **lexical & quill**: Rich text editors
+- **react-router-dom**: Routing
+- **eslint**: Code quality and linting
+
+For the full list of dependencies, check the `package.json` file.
+
+## Data Structure & Source
+
+- The project uses `public/data.json` as the data source for posts in demo and development environments.
+- Instead of a real backend, mock services and a local JSON file are used for post and content operations.
+- See `src/services/postService.ts` for mock functions handling fetching, adding, and updating posts.
+- For real API integration, update the service functions accordingly.
+
+## Project Structure
+
+```
+admin-panel/
+├── public/
+│   └── data.json           # Demo data
+├── src/
+│   ├── components/         # UI components
+│   ├── hooks/              # Custom React hooks
+│   ├── pages/              # Page components
+│   ├── services/           # Mock services and data operations
+│   ├── types/              # Type definitions
+│   ├── main.tsx            # App entry point
+│   └── ...
+├── package.json            # Dependencies and scripts
+├── vite.config.ts          # Vite configuration
+└── README.md               # Project documentation
+```
+
+## Features
+
+- Add, edit, delete posts (with mock services)
+- Filtering by category and status
+- Rich text editor support (Lexical, Quill)
+- Ready infrastructure for multi-language (AZ/EN)
+- Modern, responsive, and accessible UI
+- Fast, cached data management with React Query
+- Easily customizable theme with TailwindCSS
+
+---
+
+For issues or contributions, please open an issue or submit a pull request.

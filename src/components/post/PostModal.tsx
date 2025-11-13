@@ -279,14 +279,16 @@ const PostModal = ({
       sx={{
         "& .MuiDialog-paper": {
           borderRadius: 6,
+          scrollbarWidth: "none",
         },
       }}
       open={open}
       onClose={onClose}
       maxWidth="sm"
       fullWidth
+      className="invisible-scrollbar"
     >
-      <div className="p-4">
+      <div className="p-4 invisible-scrollbar">
         <div className="flex justify-end">
           <RxCross2
             onClick={onClose}
