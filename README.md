@@ -39,7 +39,7 @@ npm run build
 
 **To preview the production build:**
 ```bash
-npm run preview
+npm run start
 ```
 
 ## Main Dependencies
@@ -94,6 +94,3 @@ admin-panel/
 - Fast, cached data management with React Query
 - Easily customizable theme with TailwindCSS
 
----
-
-For issues or contributions, please open an issue or submit a pull request.
